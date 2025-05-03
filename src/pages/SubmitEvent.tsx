@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import { mockEvents } from '../data/mockEvents';
 import EventForm, { FormValues } from '../components/EventForm';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 const SubmitEvent = () => {
   const navigate = useNavigate();
@@ -21,6 +22,9 @@ const SubmitEvent = () => {
       id: uuidv4(),
       ...data
     });
+    
+    // Show a success toast
+    toast.success('Event submitted successfully!');
     
     // Navigate back to the events page after submission
     setTimeout(() => {
