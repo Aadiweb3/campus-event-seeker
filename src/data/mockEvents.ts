@@ -81,8 +81,7 @@ export const mockEvents: Event[] = [
   },
   {
     id: '8',
-    title: 'Taiko Community Grant',
-based Workshop',
+    title: 'Taiko Community Grant Workshop',
     description: 'Taiko Community Grants fund builders and contributors to the Taiko ecosystem. Up to 1M $TAIKO is available for innovative ideas and community building.',
     type: 'workshop',
     date: '2025-06-12T15:00:00',
