@@ -2,12 +2,13 @@
 import React from "react";
 import { Event } from "../types/event";
 import { format } from "date-fns";
-import { Calendar } from "lucide-react";
+import { Calendar, Link, Globe, MapPin, School } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -28,14 +29,17 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, isOpen, onClose }) => 
     other: "bg-event-other",
   };
 
-  const defaultImage = "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-start justify-between">
-            <DialogTitle className="text-xl font-bold">{event.title}</DialogTitle>
+            <div>
+              <DialogTitle className="text-xl font-bold">{event.title}</DialogTitle>
+              <DialogDescription className="text-sm text-gray-500">
+                Organized by {event.college}
+              </DialogDescription>
+            </div>
             <Badge className={`${eventTypeColor[event.type]} text-white ml-2`}>
               {event.type.replace('-', ' ')}
             </Badge>
@@ -45,7 +49,7 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, isOpen, onClose }) => 
         <div className="mt-4">
           <div className="h-64 mb-4 overflow-hidden rounded-md">
             <img
-              src={event.imageUrl || defaultImage}
+              src={event.imageUrl || "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"}
               alt={event.title}
               className="w-full h-full object-cover"
             />
@@ -62,22 +66,34 @@ const EventDetail: React.FC<EventDetailProps> = ({ event, isOpen, onClose }) => 
               <span>{format(new Date(event.date), "EEEE, MMMM d, yyyy • h:mm a")}</span>
             </div>
             
-            <div>
-              <h3 className="font-semibold text-sm text-gray-500">Location</h3>
-              <p className="mt-1">{event.location}</p>
+            <div className="flex items-center">
+              <MapPin className="w-5 h-5 mr-2 text-gray-500" />
+              <span>{event.location}</span>
             </div>
             
-            <div>
-              <h3 className="font-semibold text-sm text-gray-500">College</h3>
-              <p className="mt-1">{event.college}</p>
+            <div className="flex items-center">
+              <School className="w-5 h-5 mr-2 text-gray-500" />
+              <span>{event.college}</span>
+            </div>
+            
+            <div className="flex items-center">
+              <Globe className="w-5 h-5 mr-2 text-gray-500" />
+              <a 
+                href={event.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline truncate"
+              >
+                {event.link}
+              </a>
             </div>
             
             <div className="pt-4">
               <Button
-                className="w-full"
+                className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700"
                 onClick={() => window.open(event.link, "_blank")}
               >
-                Visit Event Website
+                <Link className="w-5 h-5 mr-2" /> Visit DoraHacks Event Page
               </Button>
             </div>
           </div>
