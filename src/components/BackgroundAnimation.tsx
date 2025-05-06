@@ -30,9 +30,9 @@ function FloatingShapes() {
         >
           <octahedronGeometry args={[1]} />
           <meshStandardMaterial 
-            color={i % 3 === 0 ? '#8B5CF6' : i % 3 === 1 ? '#0EA5E9' : '#F97316'} 
+            color={i % 3 === 0 ? new THREE.Color('#8B5CF6') : i % 3 === 1 ? new THREE.Color('#0EA5E9') : new THREE.Color('#F97316')}
             wireframe={i % 5 === 0}
-            transparent
+            transparent={true}
             opacity={0.7}
           />
         </mesh>
